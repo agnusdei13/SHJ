@@ -23,7 +23,7 @@ async function runExample() {
     let session = await ort.InferenceSession.create('xgb_FI.onnx');
     
    let result = await session.run(feeds);
-   let outputData = result.variable.data;
+   let outputData = result.output_label.data;
 
   outputData = parseFloat(outputData).toFixed(2)
 
