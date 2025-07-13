@@ -11,19 +11,21 @@ async function runExample() {
     const feeds = {};
     feeds[inputName] = tensorX;
 
-    const result = await session.run(feeds);
-    const outputName = session.outputNames[0];
-    let outputData = result[outputName].data[0];
-    outputData = parseFloat(outputData).toFixed(2);
-
-    const predictions = document.getElementById('predictions');
-    predictions.innerHTML = `
-        <hr> Got an output tensor with values: <br/>
-        <table>
-            <tr>
-                <td>FI prediction</td>
-                <td id="td0">${outputData}</td>
-            </tr>
-        </table>
-    `;
+    const result = await session.run(feeds);const probabilityOutput = result['output_probability'];
+    
+    if (probabilityOutput) {
+        console.log("Probability output type:", probabilityOutput.type);
+        let outputData = probabilityOutput.data[0]; 
+        outputData = parseFloat(outputData).toFixed(2);
+        
+        const predictions = document.getElementById('predictions');
+        predictions.innerHTML = '
+            <hr> Got an output tensor with values: <br/>
+            <table>
+                <tr>
+                    <td>FI prediction</td>
+                    <td id="td0">${outputData}</td>
+                </tr>
+            </table>
+        ';
 }
