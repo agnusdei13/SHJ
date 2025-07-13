@@ -11,7 +11,8 @@ async function runExample() {
     const feeds = {};
     feeds[inputName] = tensorX;
 
-    const result = await session.run(feeds);const probabilityOutput = result['output_probability'];
+    const result = await session.run(feeds);
+    const probabilityOutput = result['output_probability'];
     
     if (probabilityOutput) {
         console.log("Probability output type:", probabilityOutput.type);
