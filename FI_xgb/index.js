@@ -20,21 +20,25 @@ async function runExample() {
 
     let session = await ort.InferenceSession.create('xgb_FI.onnx');
     
-   let result = await session.run(feeds);
-   let outputData = result.output_label.data;
+   const inputName = session.inputNames[0];
+    let feeds = {};
+    feeds[inputName] = tensorX;
 
-  outputData = parseFloat(outputData).toFixed(2)
+    let result = await session.run(feeds);
 
-   let predictions = document.getElementById('predictions');
-
-  predictions.innerHTML = ` <hr> Got an output tensor with values: <br/>
-   <table>
-     <tr>
-       <td>  Rating of Wine Quality  </td>
-       <td id="td0">  ${outputData}  </td>
-     </tr>
-  </table>`;
     
+    const outputName = session.outputNames[0];
+    let outputData = result[outputName].data[0];
 
+    outputData = parseFloat(outputData).toFixed(2);
 
+    let predictions = document.getElementById('predictions');
+    predictions.innerHTML = `
+        <hr> Got an output tensor with values: <br/>
+        <table>
+            <tr>
+                <td>Rating of Wine Quality</td>
+                <td id="td0">${outputData}</td>
+            </tr>
+        </table>;
 }
