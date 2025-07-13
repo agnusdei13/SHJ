@@ -15,17 +15,15 @@ async function runExample() {
      x[10] = document.getElementById('box11').value;
      x[11] = document.getElementById('box12').value;
 
-    let tensorX = new ort.Tensor('float32', x, [1, 12] );
+        let tensorX = new ort.Tensor('float32', x, [1, 12] );
     let feeds = {input: tensorX};
 
     let session = await ort.InferenceSession.create('xgb_FI.onnx');
-
-    console.log(session.inputNames); 
     
-    let result = await session.run(feeds);
-    let outputData = result.output_label.data;
-    console.log(session.outputNames); 
-    outputData = parseFloat(outputData).toFixed(2)
+   let result = await session.run(feeds);
+   let outputData = result.output_label.data;
+
+  outputData = parseFloat(outputData).toFixed(2)
 
    let predictions = document.getElementById('predictions');
 
@@ -35,5 +33,8 @@ async function runExample() {
        <td>  Rating of Wine Quality  </td>
        <td id="td0">  ${outputData}  </td>
      </tr>
-  </table>;
+  </table>`;
+    
+
+
 }
