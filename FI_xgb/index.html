@@ -1,79 +1,37 @@
+<!DOCTYPE html>
 <html>
 <head>
-  
-<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
-<script src="index.js"></script>
-  
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
   <style>
-      
-      table, th, td {
-           border: 1px solid;
-      }
-      
-      #leftbox {
-                float:left; 
-                width:33%;
-                height:300px;
-      }
-      #middlebox{
-                float:left; 
-                width:33%;
-                height:300px;
-        }
-        #rightbox{
-                float:right;
-                width:33%;
-                height:300px;
-        }
-        h1{
-                color:green;
-                text-align:center;
-        }
-     
-     
-      
+      table, th, td { border: 1px solid; }
+      h1 { color:green; text-align:center; }
   </style>
 </head>
 <body>
-  
-  <h1> XGBoost FI model </h1>
-  
-  
-  
-  
-    <div id = "boxes1">
-         
-              
-  <input type="text" id="box1" value="200"> Gatric_redisual_volume <br/>
+
+<h1> XGBoost FI Model </h1>
+
+<div>
+  <input type="text" id="box1" value="200"> Gastric_redisual_volume <br/>
   <input type="text" id="box2" value="4"> Total_Bilirubin <br/>
-  <input type="text" id="box3" value="1"> Metastic_tumor  <br/>
+  <input type="text" id="box3" value="1"> Metastatic_tumor <br/>
   <input type="text" id="box4" value="70"> MBP_Vasopressor <br/>
-  <input type="text" id="box5" value="1" > Creatinine <br/>
+  <input type="text" id="box5" value="1"> Creatinine <br/>
   <input type="text" id="box6" value="233"> Lactate <br/>
   <input type="text" id="box7" value="200"> Fibrinogen <br/>
-  <input type="text" id="box8" value="300"> Platelets  <br/>
+  <input type="text" id="box8" value="300"> Platelets <br/>
   <input type="text" id="box9" value="207"> LDH <br/>
-  <input type="text" id="box10" value="300" > PFratio <br/>
-  <input type="text" id="box11" value="1"> Diabestes_c_Cx <br/>
+  <input type="text" id="box10" value="300"> PFratio <br/>
+  <input type="text" id="box11" value="1"> Diabetes_c_Cx <br/>
   <input type="text" id="box12" value="1"> Peripheral_vascular_disease <br/>
 
-    </div> 
-      
-  <div>
-      <input style="background-color:yellow" type="button" value="Run" onclick="runExample()"/>
-   </div>
-  
+  <br/>
+  <input style="background-color:yellow" type="button" value="Run" onclick="runExample()"/>
+</div>
 
-        <div id = "boxes2">
-              
-           
-              <h2>Inference </h2>
-              
-               <div id="predictions">
-               </div>
-              
+<div id="predictions">
+</div>
 
-        </div>
-
+<script src="index.js"></script>
 </body>
 </html>
