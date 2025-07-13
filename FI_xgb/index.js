@@ -1,7 +1,5 @@
 async function runExample() {
 
-    var x = new Float32Array( 1, 12 )
-
     var x = [];
 
      x[0] = document.getElementById('box1').value;
@@ -21,11 +19,13 @@ async function runExample() {
     let feeds = {input: tensorX};
 
     let session = await ort.InferenceSession.create('xgb_FI.onnx');
-    
-   let result = await session.run(feeds);
-   let outputData = result.output_label.data;
 
-  outputData = parseFloat(outputData).toFixed(2)
+    console.log(session.inputNames); 
+    
+    let result = await session.run(feeds);
+    let outputData = result.output_label.data;
+    console.log(session.outputNames); 
+    outputData = parseFloat(outputData).toFixed(2)
 
    let predictions = document.getElementById('predictions');
 
@@ -36,3 +36,4 @@ async function runExample() {
        <td id="td0">  ${outputData}  </td>
      </tr>
   </table>`;
+}
