@@ -16,7 +16,7 @@ async function runExample() {
      x[10] = document.getElementById('box11').value;
      x[11] = document.getElementById('box12').value;
 
-    let tensorX = new ort.Tensor('float32', x, [1, 11] );
+    let tensorX = new ort.Tensor('float32', x, [1, 12] );
     let feeds = {input: tensorX};
 
     let session = await ort.InferenceSession.create('xgb_FI.onnx');
