@@ -35,5 +35,5 @@ async function runExample() {
        <td>  Rating of Wine Quality  </td>
        <td id="td0">  ${outputData}  </td>
      </tr>
-  </table>`;
+  </table>;
 }
