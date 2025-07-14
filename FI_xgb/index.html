@@ -1,15 +1,46 @@
-<!DOCTYPE html>
 <html>
 <head>
   <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+  <script src="./index.js"></script>
+  
   <style>
-      table, th, td { border: 1px solid; }
-      h1 { color:green; text-align:center; }
+      
+      table, th, td {
+           border: 1px solid;
+      }
+      
+      #leftbox {
+                float:left; 
+                width:33%;
+                height:300px;
+      }
+      #middlebox{
+                float:left; 
+                width:33%;
+                height:300px;
+        }
+        #rightbox{
+                float:right;
+                width:33%;
+                height:300px;
+        }
+        h1{
+                color:green;
+                text-align:center;
+        }
+     
+     
+      
   </style>
 </head>
 <body>
-
-<h1> XGBoost FI Model </h1>
+  
+  <h1> Wine Quality XGBoost </h1>
+  
+  
+  
+  
+    <div id = "boxes1">
 
 <div>
   <input type="text" id="box1" value="200"> Gastric_redisual_volume <br/>
@@ -25,13 +56,24 @@
   <input type="text" id="box11" value="1"> Diabetes_c_Cx <br/>
   <input type="text" id="box12" value="1"> Peripheral_vascular_disease <br/>
 
-  <br/>
-  <input style="background-color:yellow" type="button" value="Run" onclick="runExample()"/>
-</div>
+   </div> 
+      
+  <div>
+      <input style="background-color:yellow" type="button" value="Run" onclick="runExample()"/>
+   </div>
+  
 
-<div id="predictions">
-</div>
+        <div id = "boxes2">
+              
+           
+              <h2>Inference </h2>
+              
+               <div id="predictions">
+               </div>
+              
 
-<script src="index.js"></script>
+        </div>
+  
+
 </body>
 </html>
