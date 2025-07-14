@@ -1,40 +1,41 @@
 async function runExample() {
-    let x = [];
-    for (let i = 0; i < 12; i++) {
-        x[i] = parseFloat(document.getElementById(`box${i+1}`).value);
-    }
 
-    const tensorX = new ort.Tensor('float32', x, [1, 12]);
-    const session = await ort.InferenceSession.create('xgb_FI.onnx');
     
-    const inputName = session.inputNames[0];
-    const feeds = {};
-    feeds[inputName] = tensorX;
+    var x = [];
 
-    const result = await session.run(feeds); 
+     x[0] = document.getElementById('box1').value;
+     x[1] = document.getElementById('box2').value;
+     x[2] = document.getElementById('box3').value;
+     x[3] = document.getElementById('box4').value;
+     x[4] = document.getElementById('box5').value;
+     x[5] = document.getElementById('box6').value;
+     x[6] = document.getElementById('box7').value;
+     x[7] = document.getElementById('box8').value;
+     x[8] = document.getElementById('box9').value;
+     x[9] = document.getElementById('box10').value;
+     x[10] = document.getElementById('box11').value;
+     x[11] = document.getElementById('box12').value;
+
+    let tensorX = new ort.Tensor('float32', x, [1, 12] );
+    let feeds = {float_input: tensorX};
+
+    let session = await ort.InferenceSession.create('xgboost_WineQuality_ort.onnx');
     
-    const outputLabelTensor = result['output_label'];
+   let result = await session.run(feeds);
+   let outputData = result.variable.data;
 
-    if (outputLabelTensor) {
-        console.log("Output 'output_label' type:", outputLabelTensor.type);
-        
-        let outputData = outputLabelTensor.data[0];
+  outputData = parseFloat(outputData).toFixed(2)
 
-        outputData = parseInt(outputData, 10); 
-        
-        const predictions = document.getElementById('predictions');
-        predictions.innerHTML = `
-            <hr> Got an output tensor with values: <br/>
-            <table>
-                <tr>
-                    <td>FI prediction (Label)</td>
-                    <td id="td0">${outputData}</td>
-                </tr>
-            </table>
-        `;
-    } else {
-        console.error("The 'output_label' output was not found in the model results.");
-        const predictions = document.getElementById('predictions');
-        predictions.innerHTML = `<hr> Error: Could not find prediction label output.`;
-    }
+   let predictions = document.getElementById('predictions');
+
+  predictions.innerHTML = ` <hr> Got an output tensor with values: <br/>
+   <table>
+     <tr>
+       <td>  Rating of Wine Quality  </td>
+       <td id="td0">  ${outputData}  </td>
+     </tr>
+  </table>`;
+    
+
+
 }
