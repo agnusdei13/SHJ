@@ -1,74 +1,112 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FI Prediction</title>
 
-  
-  <style>
-      
-      table, th, td {
-           border: 1px solid;
-      }
-      
-      #leftbox {
-                float:left; 
-                width:33%;
-                height:300px;
-      }
-      #middlebox{
-                float:left; 
-                width:33%;
-                height:300px;
+    <style>
+        table, th, td {
+            border: 1px solid;
         }
-        #rightbox{
-                float:right;
-                width:33%;
-                height:300px;
+        #leftbox {
+            float: left;
+            width: 33%;
+            height: 300px;
+            /* Added for visibility */
+            /* border: 1px dashed blue; */
         }
-        h1{
-                color:green;
-                text-align:center;
+        #middlebox {
+            float: left;
+            width: 33%;
+            height: 300px;
+            /* Added for visibility */
+            /* border: 1px dashed green; */
         }
-     
-     
-      
-  </style>
+        #rightbox {
+            float: right;
+            width: 33%;
+            height: 300px;
+            /* Added for visibility */
+            /* border: 1px dashed red; */
+        }
+
+        h1 {
+            color: green;
+            text-align: center;
+        }
+
+        /* Added some basic styling for better readability of inputs */
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            display: inline-block;
+            width: 150px; /* Adjust as needed */
+        }
+        .input-group input[type="text"] {
+            padding: 5px;
+            margin-left: 10px;
+        }
+        #prediction-output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
-<div id="predictions"></div>
-    <button onclick="runExample()">Run Inference</button>
-    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
-    <script src="index.js"></script> </body>
-  
-  <h1> FI prediction </h1>
-  
-  
-  
-  
-    <div id = "boxes1">
 
-<div>
-  <input type="text" id="box1" value="9"> hemoglobin_avg <br/>
-  <input type="text" id="box2" value="110"> sbp_mean <br/>
-  <input type="text" id="box3" value="0.96"> abs_lymphocytes_avg <br/>
-  <input type="text" id="box4" value="3"> renal <br/>
-  <input type="text" id="box5" value="280"> fibrinogen_avg <br/>
-  <input type="text" id="box6" value="0.3"> bilirubin_direct_avg <br/>
-  <input type="text" id="box7" value="50"> grv_value <br/>
-   </div> 
-      
-  <div>
-      <button onclick="runExample()">Get Prediction</button>
-   </div>
-  
+    <h1>FI Prediction</h1>
 
-        <div id = "boxes2">
-              
-           
-              <h2>Inference </h2>
-              
-               <div id="predictions">
-               </div>
-              
+    <div style="max-width: 800px; margin: 20px auto; padding: 20px; border: 1px solid #eee; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
 
+        <h2>Input Parameters</h2>
+        <div id="input-parameters">
+            <div class="input-group">
+                <label for="box1">hemoglobin_avg:</label>
+                <input type="text" id="box1" value="9">
+            </div>
+            <div class="input-group">
+                <label for="box2">sbp_mean:</label>
+                <input type="text" id="box2" value="110">
+            </div>
+            <div class="input-group">
+                <label for="box3">abs_lymphocytes_avg:</label>
+                <input type="text" id="box3" value="0.96">
+            </div>
+            <div class="input-group">
+                <label for="box4">renal:</label>
+                <input type="text" id="box4" value="3">
+            </div>
+            <div class="input-group">
+                <label for="box5">fibrinogen_avg:</label>
+                <input type="text" id="box5" value="280">
+            </div>
+            <div class="input-group">
+                <label for="box6">bilirubin_direct_avg:</label>
+                <input type="text" id="box6" value="0.3">
+            </div>
+            <div class="input-group">
+                <label for="box7">grv_value:</label>
+                <input type="text" id="box7" value="50">
+            </div>
+
+            <button onclick="runExample()">Run Inference</button>
         </div>
+
+        <hr style="margin: 20px 0;">
+
+        <h2>Inference Result</h2>
+        <div id="prediction-output">
+            Prediction: Awaiting input...
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+    <script src="index.js"></script>
+
 </body>
 </html>
