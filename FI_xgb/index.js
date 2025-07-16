@@ -1,36 +1,55 @@
 async function runExample() {
 
-    var x = [];
-    
-    x[0] = parseFloat(document.getElementById('box1').value);
-    x[1] = parseFloat(document.getElementById('box2').value);
-    x[2] = parseFloat(document.getElementById('box3').value);
-    x[3] = parseFloat(document.getElementById('box4').value);
-    x[4] = parseFloat(document.getElementById('box5').value);
-    x[5] = parseFloat(document.getElementById('box6').value);
-    x[6] = parseFloat(document.getElementById('box7').value);
+  const x = [];
 
-     
-    let tensorX = new ort.Tensor('float32', x, [1, 7]);
-    let feeds = { input: tensorX }; // 'input' must match your ONNX model's input name
+  for (let i = 1; i <= 7; i++) {
+    const boxId = `box${i}`;
+    const element = document.getElementById(boxId);
+    if (element) {
+      x.push(parseFloat(element.value));
+    } else {
+      console.error(`Element with ID '${boxId}' not found.`);
 
-     
-    let session = await ort.InferenceSession.create('xgboost_WineQuality_ort.onnx');
-    
-   let result = await session.run(feeds);
-   let outputData = result.output_label.data;
+      return;
+    }
+  }
 
-  outputData = parseFloat(outputData).toFixed(2)
+  const tensorX = new ort.Tensor('float32', x, [1, 7]);
 
-    let prediction = parseFloat(outputData[0]).toFixed(2);
+  const feeds = { input: tensorX };
 
-    let predictions = document.getElementById('predictions');
-    predictions.innerHTML = `
-      <hr> Got an output tensor with values: <br/>
-      <table>
-        <tr>
-          <td>FI prediction</td>
-          <td id="td0">${prediction}</td>
-        </tr>
-      </table>`;
+  try {
+
+    const session = await ort.InferenceSession.create('rfc_FI.onnx');
+
+   
+    const result = await session.run(feeds);
+
+
+    const outputData = result.output_label.data;
+
+    const prediction = parseFloat(outputData[0]).toFixed(2);
+
+
+    const predictionsElement = document.getElementById('predictions');
+    if (predictionsElement) {
+      predictionsElement.innerHTML = `
+        <hr> Got an output tensor with values: <br/>
+        <table>
+          <tr>
+            <td>FI prediction</td>
+            <td id="td0">${prediction}</td>
+          </tr>
+        </table>`;
+    } else {
+      console.error("Element with ID 'predictions' not found.");
+    }
+
+  } catch (e) {
+    console.error(`Error during ONNX inference: ${e}`);
+    const predictionsElement = document.getElementById('predictions');
+    if (predictionsElement) {
+      predictionsElement.innerHTML = `<hr><p style="color: red;">Error: Could not run prediction.</p>`;
+    }
+  }
 }
