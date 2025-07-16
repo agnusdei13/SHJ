@@ -12,26 +12,17 @@ async function runExample() {
      x[6] = document.getElementById('box7').value;
      
 
-    let tensorX = new ort.Tensor('float32', x, [1, 7] );
-    let feeds = {input: tensorX};
+    let tensorX = new ort.Tensor('float32', x, [1, 7]);
+    let feeds = { input: tensorX };
 
     let session = await ort.InferenceSession.create('rfc_FI.onnx');
-    
-   let result = await session.run(feeds);
-   let outputData = result.output_label.data;
+    let result = await session.run(feeds);
+    let outputData = result.output_label.data;
 
-  outputData = parseFloat(outputData).toFixed(2)
-
-   let predictions = document.getElementById('predictions');
-
-  predictions.innerHTML = ` <hr> Got an output tensor with values: <br/>
-   <table>
-     <tr>
-       <td>  FI prediction  </td>
-       <td id="td0">  ${outputData}  </td>
-     </tr>
-  </table>`;
-    
-
-
+    let predictions = document.getElementById('predictions');
+    predictions.innerHTML = `Prediction: ${parseFloat(outputData).toFixed(2)}`;
+  } catch (e) {
+    console.error("Inference error:", e);
+    document.getElementById('predictions').innerHTML = `<span style="color:red;">Error: ${e.message}</span>`;
+  }
 }
