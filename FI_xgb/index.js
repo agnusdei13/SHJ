@@ -22,16 +22,15 @@ async function runExample() {
 
   outputData = parseFloat(outputData).toFixed(2)
 
-   let predictions = document.getElementById('predictions');
+    let prediction = parseFloat(outputData[0]).toFixed(2);
 
-  predictions.innerHTML = ` <hr> Got an output tensor with values: <br/>
-   <table>
-     <tr>
-       <td>  FI prediction  </td>
-       <td id="td0">  ${outputData.data[0].toFixed(2)}  </td>
-     </tr>
-  </table>`;
-    
-
-
+    let predictions = document.getElementById('predictions');
+    predictions.innerHTML = `
+      <hr> Got an output tensor with values: <br/>
+      <table>
+        <tr>
+          <td>FI prediction</td>
+          <td id="td0">${prediction}</td>
+        </tr>
+      </table>`;
 }
