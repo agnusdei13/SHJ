@@ -10,19 +10,15 @@ async function runExample() {
      x[4] = document.getElementById('box5').value;
      x[5] = document.getElementById('box6').value;
      x[6] = document.getElementById('box7').value;
-     x[7] = document.getElementById('box8').value;
-     x[8] = document.getElementById('box9').value;
-     x[9] = document.getElementById('box10').value;
-     x[10] = document.getElementById('box11').value;
-     x[11] = document.getElementById('box12').value;
+     
 
-    let tensorX = new ort.Tensor('float32', x, [1, 12] );
-    let feeds = {float_input: tensorX};
+    let tensorX = new ort.Tensor('float32', x, [1, 7] );
+    let feeds = {input: tensorX};
 
-    let session = await ort.InferenceSession.create('xgboost_WineQuality_ort.onnx');
+    let session = await ort.InferenceSession.create('rfc_FI.onnx');
     
    let result = await session.run(feeds);
-   let outputData = result.variable.data;
+   let outputData = result.output_label.data;
 
   outputData = parseFloat(outputData).toFixed(2)
 
@@ -31,7 +27,7 @@ async function runExample() {
   predictions.innerHTML = ` <hr> Got an output tensor with values: <br/>
    <table>
      <tr>
-       <td>  Rating of Wine Quality  </td>
+       <td>  FI prediction  </td>
        <td id="td0">  ${outputData}  </td>
      </tr>
   </table>`;
