@@ -92,21 +92,22 @@
                 <label for="box7">grv_value:</label>
                 <input type="text" id="box7" value="50">
             </div>
+      
+  <div>
+      <input style="background-color:yellow" type="button" value="Run" onclick="runExample()"/>
+   </div>
+  
 
-            <button onclick="runExample()">Run Inference</button>
+        <div id = "boxes2">
+              
+           
+              <h2>Inference </h2>
+              
+               <div id="predictions">
+               </div>
+              
+
         </div>
-
-        <hr style="margin: 20px 0;">
-
-        <h2>Inference Result</h2>
-        <div id="prediction-output">
-            Prediction: Awaiting input...
-        </div>
-
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
-    <script src="index.js"></script>
 
 </body>
 </html>
