@@ -23,9 +23,16 @@ async function runExample() {
      
     let outputData = result.output_label.data;
 
-     
-    let predictionOutputDiv = document.getElementById('prediction-output');
+   let predictions = document.getElementById('predictions');
 
-     
-    predictionOutputDiv.innerHTML = `Prediction: ${parseFloat(outputData).toFixed(2)}`;
+  predictions.innerHTML = ` <hr> Got an output tensor with values: <br/>
+   <table>
+     <tr>
+       <td>  FI prediction  </td>
+       <td id="td0">  ${outputData.data[0].toFixed(2)}  </td>
+     </tr>
+  </table>`;
+    
+
+
 }
