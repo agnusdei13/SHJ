@@ -33,8 +33,12 @@
   </style>
 </head>
 <body>
+<div id="predictions"></div>
+    <button onclick="runExample()">Run Inference</button>
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+    <script src="index.js"></script> </body>
   
-  <h1> Wine Quality XGBoost </h1>
+  <h1> FI prediction </h1>
   
   
   
@@ -52,7 +56,7 @@
    </div> 
       
   <div>
-      <input style="background-color:yellow" type="button" value="Run" onclick="runExample()"/>
+      <button onclick="runExample()">Get Prediction</button>
    </div>
   
 
@@ -66,7 +70,5 @@
               
 
         </div>
-  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
-  <script src="./index.js"></script>  
 </body>
 </html>
