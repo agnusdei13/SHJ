@@ -15,13 +15,12 @@ async function runExample() {
     let feeds = { input: tensorX }; // 'input' must match your ONNX model's input name
 
      
-    let session = await ort.InferenceSession.create('rfc_FI.onnx');
+    let session = await ort.InferenceSession.create('xgboost_WineQuality_ort.onnx');
+    
+   let result = await session.run(feeds);
+   let outputData = result.output_label.data;
 
-  
-    let result = await session.run(feeds);
-
-     
-    let outputData = result.output_label.data;
+  outputData = parseFloat(outputData).toFixed(2)
 
    let predictions = document.getElementById('predictions');
 
